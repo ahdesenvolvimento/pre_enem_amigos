@@ -84,9 +84,9 @@ WSGI_APPLICATION = 'pre_enem_amigos.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db_mysite',
-        'USER': 'django',
-        'PASSWORD': 'sua_senha',
+        'NAME': 'db_pre_enem',
+        'USER': 'root',
+        'PASSWORD': 'hb20123456789',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
@@ -136,9 +136,9 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'usuarios.Usuarios'
+AUTH_USER_MODEL = 'usuarios.Usuario'
 
-# Configurações de segurança
+# Configuraï¿½ï¿½es de seguranï¿½a
 SECURE_HSTS_SECONDS = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
@@ -150,11 +150,11 @@ X_FRAME_OPTIONS = 'DENY'
 SECURE_HSTS_PRELOAD = True
 SECURE_SSL_REDIRECT = False
 
-# Configuração do CORS
+# Configuraï¿½ï¿½o do CORS
 CORS_ORIGIN_ALLOW_ALL = True
 
 
-# Configurações REST para autenticação
+# Configuraï¿½ï¿½es REST para autenticaï¿½ï¿½o
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
         'rest_framework.authentication.TokenAuthentication',
@@ -164,7 +164,7 @@ REST_FRAMEWORK = {
     )
 }
 
-# Duração do TOKEN, ajustar com o localstorage no frontend.
+# Duraï¿½ï¿½o do TOKEN, ajustar com o localstorage no frontend.
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=500000),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=50000),

@@ -1,6 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractUser
 
+class Base(models.Model):
+    id = models.AutoField(primary_key=True)
+    criado = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        abstract = True
+        db_table = 'base'
+
 class BaseManager(BaseUserManager):
     use_in_migrations = True
 
@@ -43,34 +50,29 @@ class Usuario(AbstractUser):
     class Meta:
         db_table = 'usuario'
 
-class Genero(models.Model):
-    id = models.AutoField(primary_key=True)
+class Genero(Base):
     genero = models.CharField('Gênero', max_length=255)
 
     class Meta:
         db_table = 'genero'
 
-class Cor(models.Model):
-    id = models.AutoField(primary_key=True)
+class Cor(Base):
     cor = models.CharField('Cor', max_length=255)
     class Meta:
         db_table = 'cor'
 
-class Disciplina(models.Model):
-    id = models.AutoField(primary_key=True)
+class Disciplina(Base):
     disciplina = models.CharField('Disciplina', max_length=255)
     descricao = models.CharField('Descricao', max_length=255)
     class Meta:
         db_table = 'disciplina'
 
-class Graduacao(models.Model):
-    id = models.AutoField(primary_key=True)
+class Graduacao(Base):
     graduacao = models.CharField('Graduação', max_length=255)
     class Meta:
         db_table = 'graduacao'
 
-class Pessoa(models.Model):
-    id = models.AutoField(primary_key=True)
+class Pessoa(Base):
     nome_oficial = models.CharField('Nome oficial', max_length=255)
     nome_social = models.CharField('Nome social', max_length=255)
     data_nasc = models.DateField('Data de nascimento')
@@ -86,31 +88,33 @@ class Pessoa(models.Model):
     observacoes = models.TextField('Observacoes')
 
     id_genero = models.ForeignKey(Genero, on_delete=models.CASCADE)
-    id_cor = models.ForeignKey(Cor, on_delete=models.CASCADE)
+    id_cor = models.ForeignKey(Cor, on_delete=models.CASCADE, null=True, blank=True)
     id_user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'pessoa'
 
-
-class Professor(Pessoa):
+class Professor(Base):
     eh_adm = models.BooleanField('É professor administrador?', default=False)
     telefone = models.CharField('Telefone', max_length=11, null=True, blank=True)
     eh_wpp = models.BooleanField('É whatsapp?', default=False)
+    horario_inicio_disp = models.TimeField('Horário de disponibilidade', null=True, blank=True)
+    horario_fim_disp = models.TimeField('Horário de termino da disponibilidade', null=True, blank=True)
     id_graduacao = models.ForeignKey(Graduacao, on_delete=models.CASCADE)
-
+    id_pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
+    
     class Meta:
         db_table = 'professor'
 
-class ProfessorDisciplina(models.Model):
-    id = models.AutoField(primary_key=True)
+class ProfessorDisciplina(Base):
     id_professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
     id_disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'prof_disciplina'
 
-class Aluno(Pessoa):
+class Aluno(Base):
+    id_pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
     class Meta:
         db_table = 'aluno'
 
