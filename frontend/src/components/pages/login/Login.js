@@ -1,5 +1,5 @@
-import Input from "../itens/Input";
-import Button from '../itens/Button';
+import Input from "../../itens/Input";
+import Button from '../../itens/Button';
 
 import styles from './Login.module.css';
 
@@ -7,7 +7,7 @@ import { Container, Modal, Spinner } from 'react-bootstrap';
 
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import useFetchPostPut from '../hooks/useFetchPostPut';
+// import useFetchPostPut from '../hooks/useFetchPostPut';
 
 export default function Login() {
     const [usuario, setUsuario] = useState([]);
