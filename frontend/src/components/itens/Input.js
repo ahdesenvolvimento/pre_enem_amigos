@@ -7,7 +7,7 @@ export default function Input({ name, text, type, placeholder, handleOnChange, v
                 id={name} 
                 className="form-control" 
                 placeholder={placeholder} 
-                // value={value} 
+                // value={value || ''} 
                 onChange={handleOnChange} 
             />
             <label htmlFor={name}>{text}</label>

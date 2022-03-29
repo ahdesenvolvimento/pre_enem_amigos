@@ -72,7 +72,7 @@ class Graduacao(Base):
     class Meta:
         db_table = 'graduacao'
 
-class Pessoa(Base):
+class Pessoa(Usuario):
     nome_oficial = models.CharField('Nome oficial', max_length=255)
     nome_social = models.CharField('Nome social', max_length=255)
     data_nasc = models.DateField('Data de nascimento')
@@ -89,19 +89,19 @@ class Pessoa(Base):
 
     id_genero = models.ForeignKey(Genero, on_delete=models.CASCADE)
     id_cor = models.ForeignKey(Cor, on_delete=models.CASCADE, null=True, blank=True)
-    id_user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    # id_user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'pessoa'
 
-class Professor(Base):
+class Professor(Pessoa):
     eh_adm = models.BooleanField('É professor administrador?', default=False)
     telefone = models.CharField('Telefone', max_length=11, null=True, blank=True)
     eh_wpp = models.BooleanField('É whatsapp?', default=False)
     horario_inicio_disp = models.TimeField('Horário de disponibilidade', null=True, blank=True)
     horario_fim_disp = models.TimeField('Horário de termino da disponibilidade', null=True, blank=True)
     id_graduacao = models.ForeignKey(Graduacao, on_delete=models.CASCADE)
-    id_pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
+    # id_pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
     
     class Meta:
         db_table = 'professor'
@@ -113,8 +113,8 @@ class ProfessorDisciplina(Base):
     class Meta:
         db_table = 'prof_disciplina'
 
-class Aluno(Base):
-    id_pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
+class Aluno(Pessoa):
+    # id_pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
     class Meta:
         db_table = 'aluno'
 

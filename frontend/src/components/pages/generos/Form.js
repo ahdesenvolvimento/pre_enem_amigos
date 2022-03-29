@@ -5,13 +5,13 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useFetchPostPut from '../../hooks/useFetchPostPut';
 export default function Form() {
-    let { id } = useParams();
+    let { id } = useParams()
     const {chamadaHook} = useFetchPostPut();
-    const [cor, setCor] = useState([]);
+    const [genero, setGenero] = useState([]);
     const [show, setShow] = useState(false);
 
     const handleChange = (e) => {
-        setCor({ ...cor, [e.target.name]: e.target.value });
+        setGenero({ ...genero, [e.target.name]: e.target.value });
     }
 
     const init = {
@@ -19,28 +19,30 @@ export default function Form() {
         headers:{
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(cor)
+        body: JSON.stringify(genero)
     }
-    const cadastroCor = (e) => {
+    const cadastroGenero = (e) => {
         e.preventDefault();
-        const {data, message, isLoading} = chamadaHook('http://localhost:8000/usuarios/cor/', init);
+        const {data, message, isLoading} = chamadaHook('http://localhost:8000/usuarios/genero/', init);
         setShow(true);
+        if (isLoading) {
+            setShow(false);
+        }
     }
     const header = (
         <div className="d-flex justify-content-between">
-            <h5 className="nav-link">{id ? (<>Editar Cor</>) : (<>Cadastro de Cores</>)}</h5>
-            <Link to="/cores/index/" className="nav-link">Voltar</Link>
+            <h5 className="nav-link">{id ? (<>Editar Gênero</>) : (<>Cadastro de Gêneros</>)}</h5>
+            <Link to="/generos/index/" className="nav-link">Voltar</Link>
         </div>
     )
     return (
         <>
             <Main header={header} setShow={setShow} show={show}>
-                <form action="" method="POST" onSubmit={cadastroCor}>
-                    <Input text="Cor" name="cor" placeholder="Cor" handleOnChange={handleChange} type="text" />
+                <form action="" method="POST" onSubmit={cadastroGenero}>
+                    <Input text="Gênero" name="genero" placeholder="Gênero" handleOnChange={handleChange} type="text" />
                     <Button variant="success" type="submit" text="Salvar" />
                 </form>
             </Main>
-
         </>
     )
 }

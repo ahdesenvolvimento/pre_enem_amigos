@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Genero, Cor, Usuario, Disciplina, Graduacao
+from .models import Genero, Cor, Professor, Usuario, Disciplina, Graduacao
 from django.contrib.auth.hashers import make_password
 
 
@@ -19,13 +19,13 @@ class UsuarioSerializer(serializers.ModelSerializer):
         return make_password(value)
 
     class Meta:
-        model = Usuario
-        fields = ('username', 'email', 'password')
+        model = Professor
+        fields = '__all__'
 
 class UsuarioGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
-        fields = ('username', 'email', 'id', )
+        fields = ('username', 'email', )
 
 class DisciplinaSerializer(serializers.ModelSerializer):
     class Meta:

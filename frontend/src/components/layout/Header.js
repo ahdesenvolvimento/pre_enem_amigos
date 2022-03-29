@@ -20,7 +20,7 @@ export default function Header() {
                                 <Link to="/cores/index" className="nav-link">Cor</Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/" className="nav-link">Professores</Link>
+                                <Link to="/professores/index" className="nav-link">Professores</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="/" className="nav-link">Alunos</Link>

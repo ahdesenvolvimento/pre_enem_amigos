@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-export default function useFetchPostPut({ url, content}) {
+export default function useFetchPostPut() {
     const [data, setData] = useState([])
     const [message, setMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    useEffect(() => {
+    const chamadaHook = (url, content) => {
         fetch(url, content)
             .then((response) => response.json())
             .then((data) => setData(data))
@@ -13,7 +13,19 @@ export default function useFetchPostPut({ url, content}) {
             .finally(() => {
                 setIsLoading(false);
             })
-    }, [])
+        return { data, message, isLoading };
+    }
+    // useEffect(() => {
+    //     fetch(url, content)
+    //         .then((response) => response.json())
+    //         .then((data) => setData(data))
+    //         .catch((error) => {
+    //             setMessage(error);
+    //         })
+    //         .finally(() => {
+    //             setIsLoading(false);
+    //         })
+    // }, [])
 
-    return { data, isLoading, message }
+    return { chamadaHook }
 }
