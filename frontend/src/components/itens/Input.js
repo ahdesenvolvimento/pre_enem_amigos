@@ -1,4 +1,4 @@
-export default function Input({ name, text, type, placeholder, handleOnChange, value }) {
+export default function Input({ name, text, type, placeholder, handleOnChange, defaultValue }) {
     return (
         <div className="form-floating mb-3">
             <input 
@@ -7,8 +7,8 @@ export default function Input({ name, text, type, placeholder, handleOnChange, v
                 id={name} 
                 className="form-control" 
                 placeholder={placeholder} 
-                // value={value || ''} 
                 onChange={handleOnChange} 
+                defaultValue={defaultValue || ''}
             />
             <label htmlFor={name}>{text}</label>
         </div>

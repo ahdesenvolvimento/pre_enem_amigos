@@ -20,6 +20,9 @@ import FormGraduacoes from './components/pages/graduacoes/Form';
 import IndexProfessores from './components/pages/professores/Index';
 import FormProfessores from './components/pages/professores/Form';
 
+import IndexTurmas from './components/pages/turmas/Index';
+import FormTurmas from './components/pages/turmas/Form';
+
 function App() {
   const token = localStorage.getItem('access-token');
   return (
@@ -49,6 +52,10 @@ function App() {
               <Route path="/professores/index" element={<IndexProfessores />} />
               <Route path="/professores/create" element={<FormProfessores />} />
               <Route path="/professores/edit/:id" element={<FormProfessores />} />
+
+              <Route path="/turmas/index" element={<IndexTurmas />} />
+              <Route path="/turmas/create" element={<FormTurmas />} />
+              <Route path="/turmas/edit/:id" element={<FormTurmas />} />
               <Route path="*" element={<Navigate to="/" />} />
               
             </>) : (<>

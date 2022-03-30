@@ -13,19 +13,7 @@ export default function useFetchPostPut() {
             .finally(() => {
                 setIsLoading(false);
             })
-        return { data, message, isLoading };
+        return { data, message, isLoading, setData };
     }
-    // useEffect(() => {
-    //     fetch(url, content)
-    //         .then((response) => response.json())
-    //         .then((data) => setData(data))
-    //         .catch((error) => {
-    //             setMessage(error);
-    //         })
-    //         .finally(() => {
-    //             setIsLoading(false);
-    //         })
-    // }, [])
-
     return { chamadaHook }
 }

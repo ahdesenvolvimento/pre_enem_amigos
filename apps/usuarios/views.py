@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http.response import JsonResponse, Http404
-# Create your views here.
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions, status
@@ -186,8 +185,8 @@ class GraduacaoVisualizar(APIView):
 class GraduacaoDetalhes(APIView):
     def get_object(self, pk):
         try:
-            return Usuario.objects.get(id=pk)
-        except Usuario.DoesNotExist:
+            return Graduacao.objects.get(id=pk)
+        except Graduacao.DoesNotExist:
             raise Http404
 
     def get(self, request, pk, format=None):

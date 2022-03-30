@@ -26,13 +26,16 @@ export default function Header() {
                                 <Link to="/" className="nav-link">Alunos</Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/" className="nav-link">Turmas</Link>
+                                <Link to="/turmas/index" className="nav-link">Turmas</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="/graduacoes/index" className="nav-link">Graduações</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="/disciplinas/index" className="nav-link">Disciplinas</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/disciplinas/index" className="nav-link">Aulas</Link>
                             </li>
                         </ul>
                     </div>
