@@ -7,17 +7,20 @@ import { Container, Modal, Spinner } from 'react-bootstrap';
 
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-// import useFetchPostPut from '../hooks/useFetchPostPut';
 
-export default function Login() {
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+export default function Login({statusNav, setStatusNav}) {
+    const MySwal = withReactContent(Swal)
+
     const [usuario, setUsuario] = useState([]);
+
     const [show, setShow] = useState(false);
     const [data, setData] = useState([])
     const [message, setMessage] = useState(null);
+    
     const [isLoading, setIsLoading] = useState(true);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     const init = {
         method: 'POST',
         headers: {
@@ -25,13 +28,14 @@ export default function Login() {
         },
         body: JSON.stringify(usuario),
     }
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const navigate = useNavigate();
 
     const handleChange = (e) => {
         setUsuario({ ...usuario, [e.target.name]: e.target.value });
     }
-    // const { data, isLoading, message, } = useFetchPostPut('http://localhost:8000/autenticacao/token/', init)
-
     const efetuarLogin = (e) => {
         e.preventDefault();
         handleShow();
@@ -42,9 +46,20 @@ export default function Login() {
                 if (!data.detail){
                     localStorage.setItem('access-token', data.access);
                     localStorage.setItem('refresh-token', data.refresh);
+                    setStatusNav(true);
                     navigate('/');
+                }else{
+                    setShow(false);
+                    MySwal.fire({
+                      title: <p>Ops!</p>,
+                      footer: 'Copyright 2018',
+                      didOpen: () => {
+                        MySwal.clickConfirm()
+                      }
+                    }).then(() => {
+                      return MySwal.fire("Usuário não encontrado.")
+                    })
                 }
-                
             })
             .catch((error) => {
                 setMessage(error);
@@ -53,8 +68,6 @@ export default function Login() {
                 setIsLoading(false);
                 handleClose();
             })
-
-
     }
     return (
         <div className={styles.layout_principal}>

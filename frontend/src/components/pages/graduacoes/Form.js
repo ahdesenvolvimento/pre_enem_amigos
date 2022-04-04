@@ -1,4 +1,4 @@
-import Main from '../../layout/Main';
+import Main from '../../layout/main/Main';
 import Input from '../../itens/Input';
 import Button from '../../itens/Button';
 import { useState } from "react";

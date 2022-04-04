@@ -1,4 +1,4 @@
-import Main from '../../layout/Main';
+import Main from '../../layout/main/Main';
 import { Link } from 'react-router-dom';
 import Tables from '../../itens/Tables';
 import useFetchGet from '../../hooks/useFetchGet';

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Login from './components/pages/login/Login';
 import Home from './components/pages/Home';
 import { Container } from 'react-bootstrap';
-import  Header  from './components/layout/Header';
+import  Header  from './components/layout/header/Header';
 
 import IndexCores from './components/pages/cores/Index';
 import FormCores from './components/pages/cores/Form';
@@ -34,15 +34,26 @@ import useFetchGet from './components/hooks/useFetchGet';
 import { useState } from 'react';
 
 function App() {
+  // Verifica se existe token no localStorage do navegador do usuário
   const token = localStorage.getItem('access-token');
+
+  // Variável para controle da navbar, quando o usuário fizer login e logout a navbar irá se ajustar de acordo com esse
+  const [statusNav, setStatusNav] = useState(false)
+
+  if (token && !statusNav){setStatusNav(true);}
+
+  /*
+    Pega o stauts do usuário autenticado, se for true e for membro da equipe, é um professor ADM, caso true e não for membro da equipe, é um professor que não é administrador
+    caso false em ambos, é um aluno.
+  */
   const [adm, setAdm] = useState(false);
   const {data} = useFetchGet('http://localhost:8000/usuarios/status/2');
-  console.log("to aqui"+data.status)
+  console.log(data.status)
   return (
     <div className="App">
       <Router>
+        <Header token={token} statusNav={statusNav} setStatusNav={setStatusNav}/>
         <Container>
-          <Header token={token}/>
           <Routes>
             {token ? (<>
               <Route path="/" element={<Home />} />
@@ -79,7 +90,7 @@ function App() {
               <Route path="*" element={<Navigate to="/" />} />
               
             </>) : (<>
-              <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<Login statusNav={statusNav} setStatusNav={setStatusNav}/>} />
               <Route path="*" element={<Navigate to="/login" />} />
             </>)}
 

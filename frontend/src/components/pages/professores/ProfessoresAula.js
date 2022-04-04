@@ -1,4 +1,4 @@
-import Main from '../../layout/Main';
+import Main from '../../layout/main/Main';
 import Input from '../../itens/Input';
 import TextArea from '../../itens/TextArea';
 import CheckBox from '../../itens/CheckBox';

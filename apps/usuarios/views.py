@@ -261,5 +261,4 @@ class StatusUsuario(APIView):
             raise Http404
     def get(self, request, pk, format=None):
         usuario = self.get_object(pk)
-        print(usuario.status)
         return JsonResponse({"status":usuario.status}, status=status.HTTP_202_ACCEPTED, safe=False)
