@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .models import Genero, Cor, Professor, Usuario, Disciplina, Graduacao
+
+from apps.core.models import AlunoTurma
+from .models import Aluno, Genero, Cor, Professor, Usuario, Disciplina, Graduacao, ProfessorDisciplina
 from django.contrib.auth.hashers import make_password
 
 
@@ -25,7 +27,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
 class UsuarioGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
-        fields = ('username', 'email', )
+        fields = ('id', 'username', 'email', )
 
 class DisciplinaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,3 +38,30 @@ class GraduacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Graduacao
         fields = '__all__'
+
+class ProfessorDisciplinaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProfessorDisciplina
+        fields = '__all__'
+
+class AlunoSerializer(serializers.ModelSerializer):
+    def validate_password(self, value):
+        return make_password(value)
+
+    class Meta:
+        model = Aluno
+        fields = '__all__'
+
+class AlunoTurmaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AlunoTurma
+        fields = '__all__'
+
+class ProfessorSerializer(serializers.ModelSerializer):
+    def validate_password(self, value):
+        return make_password(value)
+    class Meta:
+        model = Professor
+        fields = '__all__'
+
+    

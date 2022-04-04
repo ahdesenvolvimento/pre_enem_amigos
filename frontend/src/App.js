@@ -17,19 +17,32 @@ import FormDisciplinas from './components/pages/disciplinas/Form';
 import IndexGraduacoes from './components/pages/graduacoes/Index';
 import FormGraduacoes from './components/pages/graduacoes/Form';
 
+import IndexAlunos from './components/pages/alunos/Index';
+import FormAlunos from './components/pages/alunos/Form';
+import AlunosTurmas from './components/pages/alunos/AlunosTurmas';
+
 import IndexProfessores from './components/pages/professores/Index';
 import FormProfessores from './components/pages/professores/Form';
+import ProfessoresDisciplinas from './components/pages/professores/ProfessoresDisciplinas';
+import ProfessoresAula from './components/pages/professores/ProfessoresAula';
+
 
 import IndexTurmas from './components/pages/turmas/Index';
 import FormTurmas from './components/pages/turmas/Form';
 
+import useFetchGet from './components/hooks/useFetchGet';
+import { useState } from 'react';
+
 function App() {
   const token = localStorage.getItem('access-token');
+  const [adm, setAdm] = useState(false);
+  const {data} = useFetchGet('http://localhost:8000/usuarios/status/2');
+  console.log("to aqui"+data.status)
   return (
     <div className="App">
       <Router>
         <Container>
-          <Header />
+          <Header token={token}/>
           <Routes>
             {token ? (<>
               <Route path="/" element={<Home />} />
@@ -49,9 +62,16 @@ function App() {
               <Route path="/generos/create" element={<FormGeneros />} />
               <Route path="/generos/edit/:id" element={<FormGeneros />} />
 
+              <Route path="/alunos/index" element={<IndexAlunos />} />
+              <Route path="/alunos/create" element={<FormAlunos />} />
+              <Route path="/alunos/edit/:id" element={<FormAlunos />} />
+              <Route path="/alunos/turmas/:id" element={<AlunosTurmas />} />
+
               <Route path="/professores/index" element={<IndexProfessores />} />
               <Route path="/professores/create" element={<FormProfessores />} />
               <Route path="/professores/edit/:id" element={<FormProfessores />} />
+              <Route path="/professores/disciplinas/:id" element={<ProfessoresDisciplinas />} />
+              <Route path="/professores/aula/create/:id" element={<ProfessoresAula />} />
 
               <Route path="/turmas/index" element={<IndexTurmas />} />
               <Route path="/turmas/create" element={<FormTurmas />} />

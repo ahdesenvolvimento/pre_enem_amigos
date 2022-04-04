@@ -29,7 +29,7 @@ export default function Tables({ status, header, body, url, deletarLinha }) {
                                 </thead>
                                 <tbody>
                                     {body.map((linha) => (
-                                        <tr>
+                                        <tr key={linha.id}>
                                             {
                                                 Object.values(linha).map((item) => (
                                                     <td>{item}</td>
@@ -49,7 +49,7 @@ export default function Tables({ status, header, body, url, deletarLinha }) {
                 </>
             ) : (
                 <>
-                    <p>Sem dados disponíveis</p>
+                    <span>Sem dados disponíveis</span>
                 </>
             )}
         </>

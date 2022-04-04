@@ -12,5 +12,9 @@ urlpatterns = [
     path('disciplinas/<int:pk>', DisciplinaDetalhes.as_view(), name='disciplina_detalhes'),
     path('graduacoes/', GraduacaoVisualizar.as_view(), name='graduacoes_visual'),
     path('graduacoes/<int:pk>', GraduacaoDetalhes.as_view(), name='graduacoes_detalhes'),
+    path('professor_disciplina/', ProfessorDisciplinaVisualizar.as_view(), name="professor_disciplina_visualizar"),
+    path('alunos/', AlunosVisualizar.as_view(), name="alunos_visualizar"),
+    path('dados_cadastro/', GetDadosNecessarios.as_view(), name="dados_para_cadastro"),
+    path('status/<int:pk>', StatusUsuario.as_view(), name="status_usuario"),
 
 ]

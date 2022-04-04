@@ -11,8 +11,8 @@ export default function Index() {
     }
     const header = (
         <div className="d-flex justify-content-between">
-            <h5 className="nav-link">Listagem de Professores</h5>
-            <Link to="/professores/create/" className="nav-link">Novo Professor</Link>
+            <h5 className="nav-link">Listagem de Alunos</h5>
+            <Link to="/professores/create/" className="nav-link">Novo Aluno</Link>
         </div>
     )
 
@@ -23,7 +23,7 @@ export default function Index() {
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Ações</th>
+                            <th>ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,8 +36,8 @@ export default function Index() {
                                 }
                                 <td className="d-flex justify-content-around">
                                     <Link to='/' className="btn btn-primary">Editar</Link>
-                                    <Link to={'/professores/aula/create/'+linha.id} className="btn btn-primary">Criar Aula</Link>
-                                    <Link to={"/professores/disciplinas/"+linha.id} className="btn btn-primary">Vincular Disciplinas</Link>
+                                    <Link to={'/professores/aula/create/'+linha.id} className="btn btn-primary">Excluir</Link>
+                                    <Link to={"/alunos/turmas/"+linha.id} className="btn btn-primary">Vincular Turma</Link>
                                     {/* <Button type="button" text="Deletar" variant="danger" /> */}
                                 </td>
                             </tr>

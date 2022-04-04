@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Tables from '../../itens/Tables';
 import useFetchGet from '../../hooks/useFetchGet';
 import {useState} from 'react';
+import Button from '../../itens/Button';
 export default function Index() {
     const { data, isLoading, message, setData } = useFetchGet('http://localhost:8000/usuarios/genero/');
     const [dados, setDados] = useState([]);

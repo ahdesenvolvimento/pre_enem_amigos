@@ -1,5 +1,22 @@
-import {Link } from 'react-router-dom';
-export default function Header() {
+import {Link, useNavigate } from 'react-router-dom';
+import Button from '../itens/Button';
+export default function Header({token}) {
+    let navigate = useNavigate();
+    const logout = () =>{
+        const init = {
+            method:"POST",
+            headers:{
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer '+localStorage.getItem('access-token')
+            }
+        }
+        fetch('http://localhost:8000/logout/', init)
+        .finally(() => {
+            localStorage.removeItem('access-token');
+            localStorage.removeItem('refresh-token');
+            navigate('/login/');
+        })
+    }
     return (
         <header id="header">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -23,7 +40,7 @@ export default function Header() {
                                 <Link to="/professores/index" className="nav-link">Professores</Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/" className="nav-link">Alunos</Link>
+                                <Link to="/alunos/index" className="nav-link">Alunos</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="/turmas/index" className="nav-link">Turmas</Link>
@@ -37,6 +54,13 @@ export default function Header() {
                             <li className="nav-item">
                                 <Link to="/disciplinas/index" className="nav-link">Aulas</Link>
                             </li>
+                            {token && (
+                                <>
+                                    <li className="nav-item">
+                                        <Button handleOnClick={(e) => logout()} className="nav-link" text="Logout"/>
+                                    </li>
+                                </>
+                            )}
                         </ul>
                     </div>
                 </div>

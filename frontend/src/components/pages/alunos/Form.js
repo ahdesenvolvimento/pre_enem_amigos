@@ -35,10 +35,10 @@ export default function Form() {
     console.log(cores)
 
     
-    const cadastroProfessores = (e) => {
+    const cadastroAlunos = (e) => {
         e.preventDefault();
         console.log(professor)
-        const {data, message, isLoading} = chamadaHook('http://localhost:8000/usuarios/', init);
+        const {data, message, isLoading} = chamadaHook('http://localhost:8000/usuarios/alunos/', init);
         console.log(data);
         console.log(message);
         // setShow(true);
@@ -53,7 +53,7 @@ export default function Form() {
     return (
         <>
             <Main header={header} setShow={setShow} show={show}>
-                <form action="" method="POST" onSubmit={cadastroProfessores}>
+                <form action="" method="POST" onSubmit={cadastroAlunos}>
 
                     <Input text="Nome" name="nome_oficial" placeholder="Nome" handleOnChange={handleChange} type="text" />
                     <Input text="Nome social" name="nome_social" placeholder="Nome social" handleOnChange={handleChange} type="text" />
@@ -68,10 +68,6 @@ export default function Form() {
                     <TextArea text="Observações" name="observacoes" placeholder="Observações" handleOnChange={handleChange}/>
                     <Select name="id_genero" text="Gênero" options={data.generos} handleOnChange={handleChange}/>
                     <Select name="id_cor" text="Cor" options={data.cores} handleOnChange={handleChange}/>
-                    <CheckBox text="É administrador?" name="eh_adm" value="checked" handleOnChange={handleChange} />
-                    <Input text="Telefone" name="telefone" placeholder="Telefone" handleOnChange={handleChange} type="text" />
-                    <CheckBox text="É whatsapp?" name="eh_wpp" value="" handleOnChange={handleChange} />
-                    <Select name="id_graduacao" text="Graduação" options={data.graduacoes} handleOnChange={handleChange}/>
                     <Input text="E-mail" name="email" placeholder="E-mail" handleOnChange={handleChange} type="email" />
                     <Input text="Usuário" name="username" placeholder="Usuário" handleOnChange={handleChange} type="text" />
                     {/* <Input text="Senha" name="password_one" placeholder="Senha" handleOnChange={handleChange} type="password" /> */}

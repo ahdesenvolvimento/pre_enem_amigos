@@ -7,6 +7,7 @@ export default function CheckBox({ name, text, handleOnChange, value }) {
                 id={name}
                 onChange={handleOnChange}
                 checked={value}
+                value={value}
             />
             <label htmlFor={name} className="form-check-label">{text}</label>
         </div>
